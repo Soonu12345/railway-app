@@ -1,25 +1,191 @@
-<div class="row">
-  <div class="mx-auto col-lg-6">
-    <div class="input-group">
-      <input type="text" class="pnr-search-bar form-control" [(ngModel)]="pnrNumber" placeholder="Enter PNR...">
-      <span class="input-group-btn">
-        <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" (click)="getPNRStatus()" type="button">Search</button>
-      </span>
+<div class="container-fluid ">
+
+  <div class="row">
+    <div class="mx-auto col-lg-6">
+      <div class="input-group">
+        <input type="text" class="pnr-search-bar form-control" [(ngModel)]="pnrNumber" placeholder="Enter PNR...">
+        <span class="input-group-btn">
+          <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" (click)="getPNRStatus()" type="button">Search</button>
+        </span>
+      </div>
     </div>
   </div>
-</div>
-<div class="row p-3-per">
+
+
+  <div *ngIf="responseObj">
+    <div class="row m-t-3-per">
+      <div class="col-md-3">
+        <div>
+          PNR NUMBER
+        </div>
+        <div class="font-bold pnr-res-color">
+          {{responseObj.pnr}}
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        CURRENT STATUS
+        <div class="font-bold pnr-res-color">
+          {{responseObj.passengers[0].current_status}}
+        </div>
+      </div>
+      <div class="col-md-4">
+        CHART PREPARED
+        <div class="font-bold pnr-res-color">
+          {{responseObj.chart_prepared}}
+        </div>
+      </div>
+      <div class="col-md-2">
+        REFRESH
+        <div>
+          <img class="h-w-20" src="assets/refresh.svg">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="m-t-2-per">
+      <div>
+        TRAIN NAME
+      </div>
+      <div class="font-bold train-name-color">
+        {{responseObj.train.number}}-{{responseObj.from_station.name}}-{{responseObj.to_station.name}} {{responseObj.train.name}}
+      </div>
+    </div>
+
+
+
+
+    <div class="row m-t-2-per">
+      <div class="col-md-4">
+        FROM
+        <div class="font-bold pnr-res-color">
+          {{responseObj.from_station.name}}
+        </div>
+        <div class="pnr-res-color">
+          {{responseObj.doj}}
+        </div>
+      </div>
+      <div class="col-md-4">
+        TO
+        <div class="pnr-res-color font-bold">
+          {{responseObj.to_station.name}}
+        </div>
+      </div>
+      <div class="col-md-4">
+        JOURNEY TIME
+        <div class="pnr-res-color font-bold">
+          - </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="row m-t-2-per">
+      <div class="col-md-4">
+        DAY OF BOARDING
+        <div class="pnr-res-color font-bold">
+          {{responseObj.doj}}
+        </div>
+      </div>
+      <div class="col-md-4">
+        CLASS
+        <div class="pnr-res-color font-bold">
+          {{responseObj.journey_class.code}}
+        </div>
+      </div>
+      <div class="col-md-4">
+        PLATFORM NUMBER(ESTIMATED)
+        <div class="pnr-res-color font-bold">
+          -
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="row m-t-2-per">
+      <div class="col-md-4">
+        BOOKING STATUS
+        <div class="font-bold pnr-res-color">
+          {{responseObj.passengers[0].booking_status}}
+        </div>
+      </div>
+      <div class="col-md-4">
+        CURRENT STATUS
+        <div class="font-bold pnr-res-color">
+          {{responseObj.passengers[0].current_status}}
+        </div>
+      </div>
+      <div class="col-md-4">
+         TOTAL PASSENGERS
+        <div class="font-bold pnr-res-color">
+          {{responseObj.total_passengers}}
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+  </div>
+
+
+  <div class="row"  [class]="responseObj ? 'm-t-3-per' : 'm-t-2-per'">
+    <ul>
+      <li>
+        PNR status represents status of railway ticket booking.
+      </li>
+      <li>
+        You can check your PNR status by using PNR number .
+      </li>
+      <li>
+        This PNR number will be issued when you buy a ticket , it is a 10 digit number which can be found at top left corner of the
+        ticket. It provides ticket status as confirmed or wait listed or reserved, etc.
+      </li>
+    </ul>
+
+  </div>
+
+
+  <div>
+    To reserve a railway ticket online , tickets will be available in the below format. Based on the ticket status, you are eligible
+    to board the train.
+  </div>
   <ul>
     <li>
-      PNR status represents status of railway ticket booking.
+      Category 1: Available tickets
+
     </li>
     <li>
-      You can check your PNR status by using PNR number .
+      Category 2: RAC tickets
+
     </li>
     <li>
-      This PNR number will be issued when you buy a ticket , it is a 10 digit number which can be found at top left corner of the
-      ticket. It provides ticket status as confirmed or wait listed or reserved, etc.
+      Category3 : WL
     </li>
   </ul>
 
-</div>
+  <div>
+    WL : Represents Waiting list ticket: you shouldn't board the train.
+
+  </div>
+  <div>
+    RAC : Reservation Against Cancellation indicates that you are allowed to board the train, but you may end up on a seat instead
+    of a berth.
+  </div>
+  <div>
+    CNF : Confirmed ticket indicates that you can board the train and you have a berth to yourself.
+  </div>
+  <p class="m-t-2-per">
+    Once all the available tickets are sold out , RAC tickets will be released . If RAC tickets are sold out, then WL tickets
+    will be released . Sometimes, if someone cancelled their CNF reserved tickets, people of RAC/WL tickets queue can be
+    replaced.
+  </p>

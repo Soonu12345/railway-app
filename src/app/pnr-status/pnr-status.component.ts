@@ -18,6 +18,7 @@ export class PnrStatusComponent implements OnInit {
       subscribe(
         responseObj => (this.responseObj = responseObj,
           console.log(this.responseObj, 'success')),
+  
         errormsg => (
           console.log(errormsg.error.error, 'error')
         )

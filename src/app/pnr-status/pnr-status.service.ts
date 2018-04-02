@@ -10,7 +10,7 @@ import * as globals from '../globals';
 export class PnrStatusService {
 
   constructor(private http: HttpClient) { }
-  reqUrl = '';
+  reqUrl:string;
 
   getPNRStatusAPI(reqObj): Observable<object> {
     this.reqUrl=globals.base_url+'/v2/pnr-status/pnr/'+reqObj+'/'+'apikey/'+globals.apiKey+'/'

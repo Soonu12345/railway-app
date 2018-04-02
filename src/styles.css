@@ -29,3 +29,6 @@ body:after{
 .p-3-per{
     padding:3%;
 }
+.font-bold{
+    font-weight: bold;
+}
