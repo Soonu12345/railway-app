@@ -1,18 +1,26 @@
 
 <div class="container nav-blk">
-  <nav class="navbar navbar-expand-sm bg-light navbar-light" style="box-shadow: 0 1px 5px #607D8B">
+  <nav class="navbar navbar-expand-sm bg-light navbar-light main-nav" style="box-shadow: 0 1px 5px #607D8B">
     <ul class="navbar-nav">
-      <li class="nav-item ">
-        <a class="nav-link" routerLink="/pnr-status">PNR Status</a>
+      <li class="nav-item">
+        <a class="nav-link"  routerLinkActive="active-class" routerLink="/pnr-status">PNR Status</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"routerLink="/train-btw-stations">Train Between Statoins</a>
+        <a class="nav-link" routerLinkActive="active-class" routerLink="/train-btw-stations">Train Between Statoins</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/livetrain-status">Live Train Status</a>
+        <a class="nav-link" routerLinkActive="active-class" routerLink="/livetrain-status">Live Train Status</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"  routerLink="/contact-us">Contact Us</a>
+        <a class="nav-link" routerLinkActive="active-class"  routerLink="/contact-us">Contact Us</a>
+      </li>
+     
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link"  routerLink="/contact-us">
+        <img src="assets/irctc.png" />
+        </a>
       </li>
      
     </ul>
