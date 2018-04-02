@@ -24,3 +24,9 @@ body:after{
     opacity: 0.6;
     z-index: -1;
 }
+.p-15{
+    padding:15px;
+}
+.p-3-per{
+    padding:3%;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PnrStatusService} from './pnr-status.service'
 
 @Component({
   selector: 'app-pnr-status',
@@ -7,7 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PnrStatusComponent implements OnInit {
 
-  constructor() { }
+  constructor(private PnrStatusService:PnrStatusService) { }
+  pnrNumber:Number;
+  responseObj:object;
+  
+  getPNRStatus(){
+    if(this.pnrNumber){
+      this.PnrStatusService.getPNRStatusAPI(this.pnrNumber).
+      subscribe(
+        responseObj => (this.responseObj = responseObj,
+          console.log(this.responseObj, 'success')),
+        errormsg => (
+          console.log(errormsg.error.error, 'error')
+        )
+      )
+    }
+  }
 
   ngOnInit() {
   }

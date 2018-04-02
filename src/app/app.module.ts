@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule} from '@angular/forms'
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -24,7 +26,7 @@ let appServices = [ContactUsService, PnrStatusService, LivetrainStatusService, T
     TrainBtwStationsComponent
   ],
   imports: [
-    BrowserModule, AppRoutes
+    BrowserModule, AppRoutes, FormsModule, HttpClientModule
   ],
   providers: appServices,
   bootstrap: [AppComponent]

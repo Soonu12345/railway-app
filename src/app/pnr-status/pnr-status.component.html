@@ -1,3 +1,25 @@
-<p>
-  pnr-status works!
-</p>
+<div class="row">
+  <div class="mx-auto col-lg-6">
+    <div class="input-group">
+      <input type="text" class="pnr-search-bar form-control" [(ngModel)]="pnrNumber" placeholder="Enter PNR...">
+      <span class="input-group-btn">
+        <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" (click)="getPNRStatus()" type="button">Search</button>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="row p-3-per">
+  <ul>
+    <li>
+      PNR status represents status of railway ticket booking.
+    </li>
+    <li>
+      You can check your PNR status by using PNR number .
+    </li>
+    <li>
+      This PNR number will be issued when you buy a ticket , it is a 10 digit number which can be found at top left corner of the
+      ticket. It provides ticket status as confirmed or wait listed or reserved, etc.
+    </li>
+  </ul>
+
+</div>

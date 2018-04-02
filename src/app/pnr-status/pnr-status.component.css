@@ -1,0 +1,9 @@
+.pnr-search-btn{
+    background-color: #49e3ce;
+    border: 1px solid transparent;
+    border-radius: 0px 50px 50px 0px;
+}
+.pnr-search-bar{
+    border: 1px solid #fff;
+    border-radius: 50px 0px 0px 50px;
+}
