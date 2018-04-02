@@ -1,0 +1,9 @@
+.nav-blk{
+    width: 75%;
+    margin-top: 6rem;
+}
+.content-blk{
+    background-image: -webkit-linear-gradient(135deg, #9920ed 10%, #49e3ce 116%) !important;
+    color: #fff;
+    box-shadow: 0 1px 5px #607D8B;
+}

@@ -1,8 +1,25 @@
-<ul>
-  <li routerLink="/pnr-status">PNR status</li>
-  <li routerLink="/train-btw-stations">train between statoins</li>
-  <li routerLink="/livetrain-status">live train status</li>
-  <li routerLink="/contact-us">contact us</li>
 
-</ul>
-<router-outlet></router-outlet>
+<div class="container nav-blk">
+  <nav class="navbar navbar-expand-sm bg-light navbar-light" style="box-shadow: 0 1px 5px #607D8B">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/pnr-status">PNR Status</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"routerLink="/train-btw-stations">Train Between Statoins</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/livetrain-status">Live Train Status</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"  routerLink="/contact-us">Contact Us</a>
+      </li>
+     
+    </ul>
+  </nav>
+<div class="content-blk">
+    <router-outlet></router-outlet>
+</div>
+
+
+</div>
