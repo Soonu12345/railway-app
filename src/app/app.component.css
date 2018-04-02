@@ -7,3 +7,10 @@
     color: #fff;
     box-shadow: 0 1px 5px #607D8B;
 }
+a.nav-link.active-class {
+    color: #C8161D !important;
+    font-weight: bold;
+}
+.main-nav .nav-link {
+    color: #272727 ;
+}
