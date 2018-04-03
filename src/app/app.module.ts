@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms'
 import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { PnrStatusService } from './pnr-status/pnr-status.service';
 import { LivetrainStatusService } from './livetrain-status/livetrain-status.service';
 import { TrainBtwStationsService } from './train-btw-stations/train-btw-stations.service';
 import { AppRoutes } from './app.router';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 let appServices = [ContactUsService, PnrStatusService, LivetrainStatusService, TrainBtwStationsService]
 
@@ -26,7 +28,7 @@ let appServices = [ContactUsService, PnrStatusService, LivetrainStatusService, T
     TrainBtwStationsComponent
   ],
   imports: [
-    BrowserModule, AppRoutes, FormsModule, HttpClientModule
+    BrowserModule, AppRoutes, FormsModule, HttpClientModule, AngularFontAwesomeModule,NgbModule.forRoot()
   ],
   providers: appServices,
   bootstrap: [AppComponent]
