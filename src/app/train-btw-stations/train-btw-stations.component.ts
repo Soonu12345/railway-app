@@ -1,4 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { TrainBtwStationsService } from './train-btw-stations.service';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+
+const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
+  'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
+  'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
+  'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana',
+  'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+  'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
+  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
+  'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
 
 @Component({
@@ -9,8 +23,77 @@ import { Component, OnInit } from '@angular/core';
 
 export class TrainBtwStationsComponent implements OnInit {
 
+  trainsData: object;
+  errorObj: any;
+  toSourceData:any = [];
+  sorceStation:any = [];
+  public fromstation: any;
+  public tostation: any;
 
-  constructor() { }
+  responseObj: any;
+  public toSource: any;
+
+  formatter = (result: string) => result.toUpperCase();
+
+  fromStation = (text$: Observable<string>) =>
+    text$
+    .debounceTime(200)
+    .distinctUntilChanged()
+    .map(term => term === '' ? []
+    : this.sorceStation.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+
+  toStation = (text$: Observable<string>) =>
+    text$
+    .debounceTime(200)
+    .distinctUntilChanged()
+    .map(term => term === '' ? []
+    : this.sorceStation.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+
+
+  getStations (station:string) {
+    this.sorceStation = [];
+    this.toSourceData = [];
+    if(station){
+        this.TrainBtwStationsService.getStationsAPI(station).
+        subscribe(
+          responseObj => (this.responseObj = responseObj,
+            this.responseObj.stations.forEach(element => {
+              this.sorceStation.push(element.code +' ' +element.name);
+            }),
+            console.log(this.sorceStation)
+          ),
+          errormsg => (
+            console.log(errormsg.error.error, 'error')
+          )
+        )
+
+    }
+  }
+
+
+
+  replaceStations(from, to){
+    this.fromstation = to;
+    this.tostation = from;
+  }
+
+  trainBtwStations(formValues){
+    let doj = formValues.dp;
+    doj = doj.day +'-'+doj.month +'-'+doj.year;
+    let data:object = {fromstation: formValues.fromstation.split(' ')[0], tostation:formValues.tostation.split(' ')[0], doj:doj};
+
+    this.TrainBtwStationsService.getTrainBtwstationsAPI(data)
+    .subscribe(
+      responseObj =>(
+        this.trainsData = responseObj,
+        console.log(this.trainsData)
+
+      ),
+      errorObj=>(this.errorObj = errorObj)
+    )
+  }
+
+  constructor(private TrainBtwStationsService:TrainBtwStationsService) { }
 
   ngOnInit() {
   }
