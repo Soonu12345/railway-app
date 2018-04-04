@@ -1,18 +1,60 @@
 <div class="container">
-  <div class="col-md-6">
-      <form>
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" required>
+<form  #trainBtwStationsForm="ngForm" name="trainBtwStationsForm" (ngSubmit)="trainBtwStations(trainBtwStationsForm.value)">
+    <div class="row">
+        <div class="mx-auto">
+          <div class="input-group">
+            <div class="from-source">
+
+                <input id="typeahead-template" type="text" 
+                class="form-control no-border-radious" [(ngModel)]="fromstation" 
+                [ngbTypeahead]="fromStation" name="fromstation" placeholder="Starting from..." 
+                (input)="getStations($event.target.value)" [resultTemplate]="rt"
+                [resultFormatter]="formatter" />
+                
+            </div>
+            <span><img src="assets/twoway.png" class="two-way-icon" (click)="replaceStations(fromstation, tostation)"></span>
+
+            <span class="input-group-btn to-source">
+              <input id="typeahead-format" type="text"
+              class="no-border-radious form-control padding-left-20" [(ngModel)]="tostation"
+              [ngbTypeahead]="toStation" name="tostation" placeholder="Going to..." 
+              [resultFormatter]="formatter"
+              (input)="getStations($event.target.value)" />
+
+            </span>
+            <span class="input-group-btn margin-left-5">
+              <input class="form-control no-border-radious" placeholder="yyyy-mm-dd" (click)="d.toggle()"
+              name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+            </span>
+            <span class="input-group-btn margin-left-5">
+              <button class="btn no-border-radious btn-secondary train-search-btn" type="submit">Search</button>
+            </span>
           </div>
-          <div class="form-group">
-            <label for="alterEgo">Alter Ego</label>
-            <input type="text" class="form-control" id="alterEgo">
-          </div>
-      
-          <button type="submit" class="btn btn-success">Submit</button>
-      
-        </form>
-  </div>
-  
+        </div>
+      </div>
+</form>
+
+
+<p>A typeahead example that uses a formatter function for string results</p>
+
+<label for="typeahead-format">Search for a state:</label>
+
+<hr>
+<pre>Model: {{ model | json }}</pre>
+
+<div class="row"  [class]="responseObj ? 'm-t-3-per' : 'm-t-2-per'">
+  <ul>
+    <li>
+      PNR status represents status of railway ticket booking.
+    </li>
+    <li>
+      You can check your PNR status by using PNR number .
+    </li>
+    <li>
+      This PNR number will be issued when you buy a ticket , it is a 10 digit number which can be found at top left corner of the
+      ticket. It provides ticket status as confirmed or wait listed or reserved, etc.
+    </li>
+  </ul>
+
+</div>
 </div>
