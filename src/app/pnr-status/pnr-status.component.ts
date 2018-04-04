@@ -26,6 +26,11 @@ export class PnrStatusComponent implements OnInit {
     }
   }
 
+
+  //on refresh handler function
+  onRefreshHandler(){
+    this.getPNRStatus();
+  }
   ngOnInit() {
   }
 

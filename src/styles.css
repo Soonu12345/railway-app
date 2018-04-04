@@ -32,3 +32,6 @@ body:after{
 .font-bold{
     font-weight: bold;
 }
+.hand-cursor{
+    cursor: pointer;
+}
