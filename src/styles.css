@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-
+@import "../node_modules/font-awesome/css/font-awesome.css";
 body{
     background-attachment: fixed;
     background-image: url('assets/background-img.jpg');
@@ -23,6 +23,10 @@ body:after{
     opacity: 0.6;
     z-index: -1;
 }
+.error-message{
+    color: #C8161D;
+}
+
 .p-15{
     padding:15px;
 }
@@ -31,4 +35,18 @@ body:after{
 }
 .font-bold{
     font-weight: bold;
+}
+
+.custom-accordion .card-body {
+    color: #000000 !important;
+    background: #ebebeb !important
+    
+}
+
+.custom-accordion .card {
+    margin-bottom: 10px;
+}
+
+.custom-accordion .card-header {
+    padding: 5px 25px !important;
 }
