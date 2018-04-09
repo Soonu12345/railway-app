@@ -35,3 +35,9 @@ body:after{
 .hand-cursor{
     cursor: pointer;
 }
+.w-100{
+    width:100%;
+}
+.m-t-20{
+    margin-top:20px;
+}

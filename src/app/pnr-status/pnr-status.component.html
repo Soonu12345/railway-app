@@ -1,14 +1,21 @@
 <div class="container-fluid ">
 
   <div class="row">
-    <div class="mx-auto col-lg-6">
-      <div class="input-group">
-        <input type="text" class="pnr-search-bar form-control" [(ngModel)]="pnrNumber" placeholder="Enter PNR...">
-        <span class="input-group-btn">
-          <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" (click)="getPNRStatus()" type="button">Search</button>
-        </span>
-      </div>
-    </div>
+   <form #pnrForm="ngForm" name="pnrForm" 
+   class="w-100"
+   (ngSubmit)="pnrForm.valid && getPNRStatus()">
+      <div class="mx-auto col-lg-6">
+          <div class="input-group">
+            <input type="text" class="pnr-search-bar form-control"
+            name="pnrNumber" 
+            [(ngModel)]="pnrNumber" placeholder="Enter PNR...">
+            <span class="input-group-btn">
+              <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" (click)="getPNRStatus()" type="button">Search</button>
+            </span>
+          </div>
+        </div>
+   </form>
+     
   </div>
 
 
@@ -93,7 +100,7 @@
       <div class="col-md-4">
         CLASS
         <div class="pnr-res-color font-bold">
-          {{responseObj.journey_class.code}}
+          {{responseObj.journey_class ? responseObj.journey_class.code : 'NA'}}
         </div>
       </div>
       <div class="col-md-4">
@@ -111,13 +118,13 @@
       <div class="col-md-4">
         BOOKING STATUS
         <div class="font-bold pnr-res-color">
-          {{responseObj.passengers[0].booking_status}}
+          {{responseObj.passengers.length > 0 ? responseObj.passengers[0].booking_status : 'NA'}}
         </div>
       </div>
       <div class="col-md-4">
         CURRENT STATUS
         <div class="font-bold pnr-res-color">
-          {{responseObj.passengers[0].current_status}}
+          {{responseObj.passengers.length > 0 ? responseObj.passengers[0].current_status : 'NA'}}
         </div>
       </div>
       <div class="col-md-4">

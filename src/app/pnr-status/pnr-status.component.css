@@ -1,8 +1,4 @@
-.pnr-search-btn{
-    background-color: #49e3ce;
-    border: 1px solid transparent;
-    border-radius: 0px;
-}
+
 .pnr-search-bar{
     border: 1px solid #fff;
     border-radius: 0px;
@@ -23,4 +19,9 @@ color: #442171;
 }
 .train-name-color{
     color: #41FFE6;
+}
+.pnr-search-btn{
+    background-color: #49e3ce;
+    border: 1px solid transparent;
+    border-radius: 0px;
 }

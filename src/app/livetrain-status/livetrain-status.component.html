@@ -1,3 +1,51 @@
-<p>
-  livetrain-status works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <form #LiveTrainStatusForm="ngForm" name="LiveTrainStatusForm" class="w-100 row" (ngSubmit)="LiveTrainStatusForm.valid && getLiveTrainStatus()">
+      <div class="col-lg-6">
+        <div>
+          Train Number
+        </div>
+        <div class="input-group">
+          <input type="text" class="pnr-search-bar form-control" name="trainNumber" [(ngModel)]="trainNumber" placeholder="Enter Train Number...">
+          <span class="input-group-btn">
+            <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" (click)="getLiveTrainStatus()" type="button">
+              Search
+            </button>
+          </span>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+
+
+
+
+  <ul class="list-group m-t-20 row">
+    <li class="list-group-item live-status">
+      <div class="row">
+        <div class="col-md-1">
+          <div class="active-state">
+          </div>
+        </div>
+        <div class="col-md-2">
+          STATION
+        </div>
+        <div class="col-md-2">
+          ARRIVAL
+        </div>
+        <div class="col-md-2">
+          DEPARTURE
+        </div>
+        <div class="col-md-1">
+          DISTANCE
+        </div>
+        <div class="col-md-4">
+          ETA (Estimated Time Of Arrival)
+        </div>
+      </div>
+    </li>
+
+  </ul>
+</div>
