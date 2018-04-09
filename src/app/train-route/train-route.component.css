@@ -1,0 +1,26 @@
+.pnr-search-btn{
+    background-color: #49e3ce;
+    border: 1px solid transparent;
+    border-radius: 0px;
+}
+.pnr-search-bar{
+    border: 1px solid #fff;
+    border-radius: 0px;
+}
+.h-w-20{
+    height: 20px;
+    width: 20px;
+}
+.m-t-3-per{
+    margin-top:3%;
+}
+.m-t-2-per{
+    margin-top:2%;
+}
+.pnr-res-color{
+/* color: rgba(105, 39, 101, 0.7294117647058823); */
+color: #673AB7;
+}
+.train-name-color{
+    color: rgba(7, 3, 47, 0.7294117647058823);
+}
