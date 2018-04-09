@@ -22,8 +22,12 @@ const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'C
 })
 
 export class TrainBtwStationsComponent implements OnInit {
-
-  trainsData: object;
+  
+  noTrainsFound: boolean;
+  trainBtwStationsForminvalid: boolean;
+ public isCollapsed = true;
+  errormsg: string;
+  trainsData: any;
   errorObj: any;
   toSourceData:any = [];
   sorceStation:any = [];
@@ -57,10 +61,10 @@ export class TrainBtwStationsComponent implements OnInit {
         this.TrainBtwStationsService.getStationsAPI(station).
         subscribe(
           responseObj => (this.responseObj = responseObj,
-            this.responseObj.stations.forEach(element => {
+
+            this.responseObj.stations ? this.responseObj.stations.forEach(element => {
               this.sorceStation.push(element.code +' ' +element.name);
-            }),
-            console.log(this.sorceStation)
+            }) : this.errormsg = 'no trains found in this route'
           ),
           errormsg => (
             console.log(errormsg.error.error, 'error')
@@ -78,19 +82,23 @@ export class TrainBtwStationsComponent implements OnInit {
   }
 
   trainBtwStations(formValues){
-    let doj = formValues.dp;
-    doj = doj.day +'-'+doj.month +'-'+doj.year;
-    let data:object = {fromstation: formValues.fromstation.split(' ')[0], tostation:formValues.tostation.split(' ')[0], doj:doj};
-
-    this.TrainBtwStationsService.getTrainBtwstationsAPI(data)
-    .subscribe(
-      responseObj =>(
-        this.trainsData = responseObj,
-        console.log(this.trainsData)
-
-      ),
-      errorObj=>(this.errorObj = errorObj)
-    )
+    if(formValues.fromstation && formValues.tostation && formValues.dp){
+      let doj = formValues.dp;
+      doj = doj.day +'-'+doj.month +'-'+doj.year;
+      let data:object = {fromstation: formValues.fromstation.split(' ')[0], tostation:formValues.tostation.split(' ')[0], doj:doj};
+  
+      this.TrainBtwStationsService.getTrainBtwstationsAPI(data)
+      .subscribe(
+        responseObj =>(
+          this.trainsData = responseObj,
+          this.trainsData.trains.length ===0 ?this.noTrainsFound =true : this.noTrainsFound =false
+        ),
+        errorObj=>(this.errorObj = errorObj)
+      )
+    } else {
+      this.trainBtwStationsForminvalid = true;
+    }
+  
   }
 
   constructor(private TrainBtwStationsService:TrainBtwStationsService) { }

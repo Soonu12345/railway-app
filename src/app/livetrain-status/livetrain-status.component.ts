@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LivetrainStatusService} from './livetrain-status.service'
+import { LivetrainStatusService } from './livetrain-status.service'
 
 @Component({
   selector: 'app-livetrain-status',
@@ -8,25 +8,27 @@ import {LivetrainStatusService} from './livetrain-status.service'
 })
 export class LivetrainStatusComponent implements OnInit {
 
-  constructor(private LivetrainStatusService:LivetrainStatusService) { }
+  constructor(private LivetrainStatusService: LivetrainStatusService) { }
   trainNumber: any;
-  responseObj:object;
-  Date:string;
+  responseObj: object;
+  liveData: Array<object>;
+  Date: string;
   ngOnInit() {
   }
   getLiveTrainStatus() {
     if (this.trainNumber) {
       this.Date = '09-04-2018';
 
-      this.LivetrainStatusService.getLiveTrainStatus(this.trainNumber,this.Date).
-      subscribe(
+      this.LivetrainStatusService.getLiveTrainStatus(this.trainNumber, this.Date).
+        subscribe(
         responseObj => (this.responseObj = responseObj,
+          this.liveData = responseObj.route,
           console.log(this.responseObj, 'success')),
-  
+
         errormsg => (
           console.log(errormsg.error.error, 'error')
         )
-      )
+        )
     }
   }
 }

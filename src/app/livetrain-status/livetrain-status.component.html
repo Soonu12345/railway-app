@@ -22,7 +22,7 @@
 
 
 
-  <ul class="list-group m-t-20 row">
+  <ul class="list-group m-t-20 row font-14">
     <li class="list-group-item live-status">
       <div class="row">
         <div class="col-md-1">
@@ -38,13 +38,38 @@
         <div class="col-md-2">
           DEPARTURE
         </div>
-        <div class="col-md-1">
-          DISTANCE
+        <div class="col-md-2">
+          DISTANCE(km)
         </div>
-        <div class="col-md-4">
-          ETA (Estimated Time Of Arrival)
+        <div class="col-md-3 p-0">
+         STATUS
         </div>
       </div>
+
+      <div class="row"
+      *ngFor="let liveRecord of liveData">
+          <div class="col-md-1">
+            <div class="active-state">
+            </div>
+          </div>
+          <div class="col-md-2">
+            {{liveRecord.station.name}} ({{liveRecord.station.code}})
+          </div>
+          <div class="col-md-2">
+            {{liveRecord.scharr}}
+          </div>
+          <div class="col-md-2">
+            {{liveRecord.actdep}}
+          </div>
+          <div class="col-md-1">
+            {{liveRecord.distance}}
+          </div>
+          <div class="col-md-4">
+           {{liveRecord.status}}
+          </div>
+        </div>
+
+
     </li>
 
   </ul>
