@@ -16,8 +16,10 @@ import { LivetrainStatusService } from './livetrain-status/livetrain-status.serv
 import { TrainBtwStationsService } from './train-btw-stations/train-btw-stations.service';
 import { AppRoutes } from './app.router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { TrainRouteComponent } from './train-route/train-route.component';
+import { TrainRouteService } from './train-route/train-route.service';
 
-let appServices = [ContactUsService, PnrStatusService, LivetrainStatusService, TrainBtwStationsService]
+let appServices = [ContactUsService, PnrStatusService, LivetrainStatusService, TrainBtwStationsService, TrainRouteService]
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ let appServices = [ContactUsService, PnrStatusService, LivetrainStatusService, T
     PnrStatusComponent,
     ContactUsComponent,
     LivetrainStatusComponent,
-    TrainBtwStationsComponent
+    TrainBtwStationsComponent,
+    TrainRouteComponent
   ],
   imports: [
     BrowserModule, AppRoutes, FormsModule, HttpClientModule, AngularFontAwesomeModule,NgbModule.forRoot()

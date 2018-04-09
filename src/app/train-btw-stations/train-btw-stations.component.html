@@ -84,7 +84,7 @@
         <div class="row"  style="margin-bottom:20px;">
           <div class="col-md-4">
             <div><b>This train will run on</b></div>
-            <span *ngFor="let day of train.days">
+            <span *ngFor="let day of train?.days">
               <span style="width:40px;display:inline-block">{{day.code}}</span>
               <span *ngIf="day.runs==='Y'">
                 <i class="fa fa-check" style="color: blue;"></i>
@@ -97,7 +97,7 @@
           </div>
           <div class="col-md-4">
             <div><b>Available Classes</b></div>
-            <span *ngFor="let class of train.classes">
+            <span *ngFor="let class of train?.classes">
               <span><b>{{class.code}}: </b></span>
               <span>{{class.name}}</span>
               <br>
@@ -107,6 +107,42 @@
       </ng-template>
     </ngb-panel>
   </ngb-accordion>
+</div>
+<div class="container" [class]="trainsData ? 'm-t-3-per' : 'm-t-2-per'">
+  <div>
+      Day-to -day , our Indian railways demand is increasing and its becoming hard to find the trains running between two stations via IRCTC train book.
+  </div>
+  <div>
+      <div>Now , to enquire the below required information , its an easy process .</div>
+      <ul>
+        <li>To get detailed list and number of trains running in between 2 certain stations</li>
+        <li>To know the timings of the trains running</li>
+        <li>Operative days</li>
+      </ul>
+  </div>
+  <div>
+      <b>How to search trains between two stations?</b>
+  </div>
+  <div>
+      <p>
+          you can provide the names of the two stations (source and destination) in two search boxes. 
+          When you type the name of a station, a drop-down menu will give you at least one choices of the station name and the station code. Just select the station you need.
+      </p>
+      <p>
+          After choosing source and destionation of the train stations and station code , essentially select the date of journey and then click on search train.
+      </p>
+      <div>After you finish the above procedure, the accompanying indexed lists will show up:</div>
+      <ol>
+        <li>Number of trains running between the two selected stations</li>
+        <li>Indian Railway train codes/ Train Numbers</li>
+        <li>Train names</li>
+        <li>The train station of origin</li>
+        <li>Scheduled Departure time</li>
+        <li>Scheduled Arrival time</li>
+        <li>The Weekly Schedule of the trains (Number of days the trains run in a week) </li>
+        <li>The Travel Class: AC, Chair Car, Sleeper, etc </li>
+      </ol>
+  </div>
 </div>
   
 
