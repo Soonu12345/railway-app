@@ -26,20 +26,20 @@
           PNR NUMBER
         </div>
         <div class="font-bold pnr-res-color">
-          {{responseObj.pnr}}
+          {{responseObj?.pnr}}
         </div>
       </div>
 
       <div class="col-md-3">
         CURRENT STATUS
         <div class="font-bold pnr-res-color">
-          {{responseObj.passengers[0].current_status}}
+          {{responseObj?.passengers[0]?.current_status}}
         </div>
       </div>
       <div class="col-md-4">
         CHART PREPARED
         <div class="font-bold pnr-res-color">
-          {{responseObj.chart_prepared}}
+          {{responseObj?.chart_prepared}}
         </div>
       </div>
       <div class="col-md-2">
@@ -57,7 +57,7 @@
         TRAIN NAME
       </div>
       <div class="font-bold train-name-color">
-        {{responseObj.train.number}}-{{responseObj.from_station.name}}-{{responseObj.to_station.name}} {{responseObj.train.name}}
+        {{responseObj?.train?.number}}-{{responseObj?.from_station?.name}}-{{responseObj?.to_station?.name}} {{responseObj?.train?.name}}
       </div>
     </div>
 
@@ -68,16 +68,16 @@
       <div class="col-md-4">
         FROM
         <div class="font-bold pnr-res-color">
-          {{responseObj.from_station.name}}
+          {{responseObj?.from_station?.name}}
         </div>
         <div class="pnr-res-color">
-          {{responseObj.doj}}
+          {{responseObj?.doj}}
         </div>
       </div>
       <div class="col-md-4">
         TO
         <div class="pnr-res-color font-bold">
-          {{responseObj.to_station.name}}
+          {{responseObj?.to_station?.name}}
         </div>
       </div>
       <div class="col-md-4">
@@ -94,13 +94,13 @@
       <div class="col-md-4">
         DAY OF BOARDING
         <div class="pnr-res-color font-bold">
-          {{responseObj.doj}}
+          {{responseObj?.doj}}
         </div>
       </div>
       <div class="col-md-4">
         CLASS
         <div class="pnr-res-color font-bold">
-          {{responseObj.journey_class ? responseObj.journey_class.code : 'NA'}}
+          {{responseObj?.journey_class ? responseObj?.journey_class?.code : 'NA'}}
         </div>
       </div>
       <div class="col-md-4">
@@ -118,19 +118,19 @@
       <div class="col-md-4">
         BOOKING STATUS
         <div class="font-bold pnr-res-color">
-          {{responseObj.passengers.length > 0 ? responseObj.passengers[0].booking_status : 'NA'}}
+          {{responseObj?.passengers?.length > 0 ? responseObj?.passengers[0]?.booking_status : 'NA'}}
         </div>
       </div>
       <div class="col-md-4">
         CURRENT STATUS
         <div class="font-bold pnr-res-color">
-          {{responseObj.passengers.length > 0 ? responseObj.passengers[0].current_status : 'NA'}}
+          {{responseObj?.passengers?.length > 0 ? responseObj?.passengers[0]?.current_status : 'NA'}}
         </div>
       </div>
       <div class="col-md-4">
          TOTAL PASSENGERS
         <div class="font-bold pnr-res-color">
-          {{responseObj.total_passengers}}
+          {{responseObj?.total_passengers}}
         </div>
       </div>
     </div>
