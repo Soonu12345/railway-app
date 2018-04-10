@@ -11,24 +11,26 @@ export class LivetrainStatusComponent implements OnInit {
   constructor(private LivetrainStatusService: LivetrainStatusService) { }
   trainNumber: any;
   responseObj: object;
-  liveData: Array<object>;
+  res:any;
+  liveData: object;
+  trainNumberExistance:boolean;
   Date: string;
   ngOnInit() {
   }
   getLiveTrainStatus() {
     if (this.trainNumber) {
-      this.Date = '09-04-2018';
-
+      this.trainNumberExistance = false;
+      this.Date = '10-04-2018';
       this.LivetrainStatusService.getLiveTrainStatus(this.trainNumber, this.Date).
         subscribe(
         responseObj => (this.responseObj = responseObj,
-          this.liveData = responseObj.route,
-          console.log(this.responseObj, 'success')),
-
+          this.liveData = responseObj),
         errormsg => (
           console.log(errormsg.error.error, 'error')
         )
         )
+    } else {
+      this.trainNumberExistance = true;
     }
   }
 }
