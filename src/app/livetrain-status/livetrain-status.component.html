@@ -1,25 +1,18 @@
-<div class="container-fluid">
-  <div class="row">
-    <form #LiveTrainStatusForm="ngForm" name="LiveTrainStatusForm" class="w-100 row" (ngSubmit)="LiveTrainStatusForm.valid && getLiveTrainStatus()">
-      <div class="col-lg-6">
-        <div>
-          Train Number
-        </div>
-        <div class="input-group">
-          <input type="text" class="pnr-search-bar form-control" name="trainNumber" [(ngModel)]="trainNumber" placeholder="Enter Train Number...">
+<div class="container">
+
+  <form #LiveTrainStatusForm="ngForm" name="LiveTrainStatusForm" (ngSubmit)="LiveTrainStatusForm.valid && getLiveTrainStatus()">
+    <div class="row">
+      <div class="mx-auto col-lg-6">
+        <div class="input-group form-group">
+          <input type="text"  #trainNum="ngModel" class="pnr-search-bar form-control" name="trainNum" [(ngModel)]="trainNumber" placeholder="Enter Train Number..." required>
           <span class="input-group-btn">
-            <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" (click)="getLiveTrainStatus()" type="button">
-              Search
-            </button>
+            <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" type="submit">Search</button>
           </span>
         </div>
-        <div class="error-message" *ngIf="trainNumberExistance">Please enter Train Number</div>
+        <div class="error-message" *ngIf="LiveTrainStatusForm.submitted && trainNum.errors?.required">Please enter Train Number</div>
       </div>
-    </form>
-
-  </div>
-
-
+    </div>
+  </form>
 
   <div class="row m-t-20" *ngIf="responseObj">
     {{responseObj.position}}
@@ -57,26 +50,20 @@
         <td>{{liveRecord.status}}</td>
       </tr>
     </table>
-    <div *ngIf="(responseObj && responseObj.train.name===null)" class="err-msg col-md-12 text-center">
-      No data found
+
+    <div *ngIf="apiKeyFail || noDataFound" class="err-msg col-md-12 text-center">
+        No Data found
     </div>
+    <div *ngIf="trainNumWrong" class="err-msg col-md-12 text-center">
+      Please check the Train Number you have entered.
+    </div>
+    <div *ngIf="loadingFail" class="err-msg col-md-12 text-center">
+      Data couldn’t be loaded on our servers. Request couldn’t go through.
+    </div>
+
   </div>
-  <div class="row m-t-20">
-    Live train running status for Indian railway trains means the exact location of any train and its real time delay status.
-    It may also include the estimated arrival of the train at any particular station en-route.
+  <div class="m-t-20">
+    <div>liveTrainStatusContent</div>
+    <div>Note : The location shown is based on the data provided by indian railways. The actual location may vary in reality.</div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>

@@ -20,9 +20,20 @@ export class LivetrainStatusComponent implements OnInit {
   mm: any;
   yyyy:any;
   reqDate:any;
+  noDataFound: boolean;
+  loadingFail: boolean;
+  trainNumWrong: boolean;
+  apiKeyFail: boolean;
+
   ngOnInit() {
   }
   getLiveTrainStatus() {
+    
+    this.apiKeyFail = false;
+    this.trainNumWrong = false;
+    this.noDataFound = false;
+    this.loadingFail = false;
+
     if (this.trainNumber) {
       this.trainNumberExistance = false;
 
@@ -42,7 +53,10 @@ export class LivetrainStatusComponent implements OnInit {
       this.LivetrainStatusService.getLiveTrainStatus(reqTrainNumber, this.reqDate).
         subscribe(
         responseObj => (this.responseObj = responseObj,
-
+          (this.responseObj.route && this.responseObj.route.length === 0 && this.responseObj.response_code === 500) ? this.apiKeyFail = true: this.apiKeyFail = false, 
+          (this.responseObj.route && this.responseObj.route.length === 0 && this.responseObj.response_code === 502) ? this.trainNumWrong = true: this.trainNumWrong = false,
+          (this.responseObj.route && this.responseObj.route.length === 0 && this.responseObj.response_code === 404) ? this.noDataFound = true: this.noDataFound = false, 
+          (this.responseObj.route && this.responseObj.route.length === 0 && this.responseObj.response_code === 405) ? this.loadingFail = true: this.loadingFail = false, 
           (this.responseObj.route && this.responseObj.route.length > 0) ?
             (index = this.responseObj.route.findIndex(
               img => img.station.code === this.responseObj.current_station.code),
