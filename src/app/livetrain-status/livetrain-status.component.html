@@ -1,7 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <form #LiveTrainStatusForm="ngForm" name="LiveTrainStatusForm" class="w-100 row" 
-    (ngSubmit)="LiveTrainStatusForm.valid && getLiveTrainStatus()">
+    <form #LiveTrainStatusForm="ngForm" name="LiveTrainStatusForm" class="w-100 row" (ngSubmit)="LiveTrainStatusForm.valid && getLiveTrainStatus()">
       <div class="col-lg-6">
         <div>
           Train Number
@@ -22,8 +21,10 @@
 
 
 
-  <div class="row m-t-20" *ngIf="(liveRecord && liveRecord.station && liveRecord.station.name)">
-    <table class="table table-striped table-condensed table-hover" align="center">
+  <div class="row m-t-20" *ngIf="responseObj">
+    {{responseObj.position}}
+    <table class="m-t-20 table table-striped table-condensed table-hover" align="center"
+    *ngIf="responseObj.train.name!==null">
       <tr>
         <th>NO.</th>
         <th>Station Name</th>
@@ -32,21 +33,38 @@
         <th>Distance in km</th>
         <th>Status</th>
       </tr>
-      <tr *ngFor="let liveRecord of liveData?.route">
+
+      <tr *ngFor="let liveRecord of liveData">
         <td>
-          <div class="active-state">
+          <div class="active-state" *ngIf="responseObj.current_station.code!==liveRecord.station.code">
 
           </div>
+   
+          <div class="blink_me" *ngIf="responseObj.current_station.code===liveRecord.station.code">
+            <div class="active-circle-outer">
+              <div class="active-circle-inner">
+              </div>
+            </div>
+          </div>
+
         </td>
         <td>{{liveRecord.station?liveRecord.station.name : 'NA'}} ({{liveRecord.station.code}})</td>
-        <td ><b>{{liveRecord.actarr}}</b></td>
-        <td >{{liveRecord.actdep}}</td>
+        <td>
+          <b>{{liveRecord.actarr}}</b>
+        </td>
+        <td>{{liveRecord.actdep}}</td>
         <td>{{liveRecord.distance}}</td>
         <td>{{liveRecord.status}}</td>
       </tr>
     </table>
+    <div *ngIf="(responseObj && responseObj.train.name===null)" class="err-msg col-md-12 text-center">
+      No data found
+    </div>
   </div>
-
+  <div class="row m-t-20">
+    Live train running status for Indian railway trains means the exact location of any train and its real time delay status.
+    It may also include the estimated arrival of the train at any particular station en-route.
+  </div>
 
 
 

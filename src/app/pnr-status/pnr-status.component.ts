@@ -11,9 +11,11 @@ export class PnrStatusComponent implements OnInit {
   constructor(private PnrStatusService:PnrStatusService) { }
   pnrNumber:Number;
   responseObj:object;
+  isPNRNumberEmpty:boolean;
   
   getPNRStatus(){
     if(this.pnrNumber){
+      this.isPNRNumberEmpty = false;
       this.PnrStatusService.getPNRStatusAPI(this.pnrNumber).
       subscribe(
         responseObj => (this.responseObj = responseObj,
@@ -23,6 +25,9 @@ export class PnrStatusComponent implements OnInit {
           console.log(errormsg.error.error, 'error')
         )
       )
+    }
+    else {
+      this.isPNRNumberEmpty = true;
     }
   }
 

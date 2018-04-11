@@ -62,3 +62,8 @@ body:after{
 .font-14{
     font-size:14px;
 }
+.err-msg{
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
+}

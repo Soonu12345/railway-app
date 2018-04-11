@@ -13,6 +13,7 @@
               <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" (click)="getPNRStatus()" type="button">Search</button>
             </span>
           </div>
+          <div class="error-message" *ngIf="isPNRNumberEmpty">Please enter PNR Number</div>
         </div>
    </form>
      
