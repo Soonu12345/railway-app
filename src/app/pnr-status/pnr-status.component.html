@@ -1,26 +1,31 @@
-<div class="container-fluid ">
+<div class="container">
 
-  <div class="row">
-   <form #pnrForm="ngForm" name="pnrForm" 
-   class="w-100"
-   (ngSubmit)="pnrForm.valid && getPNRStatus()">
-      <div class="mx-auto col-lg-6">
-          <div class="input-group">
-            <input type="text" class="pnr-search-bar form-control"
-            name="pnrNumber" 
-            [(ngModel)]="pnrNumber" placeholder="Enter PNR...">
+   <form #pnrForm="ngForm" name="pnrForm" (ngSubmit)="pnrForm.valid && getPNRStatus()">
+      <div class="row">
+        <div class="mx-auto col-lg-6">
+          <div class="input-group form-group">
+            <input type="text"  #pnrNum="ngModel" class="pnr-search-bar form-control" name="pnrNum" [(ngModel)]="pnrNumber" placeholder="Enter Train Number..." required>
             <span class="input-group-btn">
-              <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" (click)="getPNRStatus()" type="button">Search</button>
+              <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" type="submit">Search</button>
             </span>
           </div>
-          <div class="error-message" *ngIf="isPNRNumberEmpty">Please enter PNR Number</div>
+          <div class="error-message" *ngIf="pnrForm.submitted && pnrNum.errors?.required">Please enter Train Number</div>
         </div>
-   </form>
-     
+      </div>
+    </form>
+
+    <div *ngIf="apiKeyFail || noDataFound" class="err-msg text-center col-md-12">
+        No Data found
+    </div>
+    <div *ngIf="trainNumWrong" class="err-msg text-center col-md-12">
+      Please check the PNR Number you have entered.
+    </div>
+    <div *ngIf="loadingFail" class="err-msg text-center col-md-12">
+      Data couldn’t be loaded on our servers. Request couldn’t go through.
+    </div>
   </div>
 
-
-  <div *ngIf="responseObj">
+  <div *ngIf="responseObj?.pnr">
     <div class="row m-t-3-per">
       <div class="col-md-3">
         <div>
@@ -146,7 +151,7 @@
   </div>
 
 
-  <div class="row"  [class]="responseObj ? 'm-t-3-per' : 'm-t-2-per'">
+  <div class="row m-t-3-per">
     <ul>
       <li>
         PNR status represents status of railway ticket booking.

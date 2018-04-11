@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms'
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -18,8 +18,14 @@ import { AppRoutes } from './app.router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { TrainRouteComponent } from './train-route/train-route.component';
 import { TrainRouteService } from './train-route/train-route.service';
+import { loadingInterceptor } from './loadinginterseptcors';
 
-let appServices = [ContactUsService, PnrStatusService, LivetrainStatusService, TrainBtwStationsService, TrainRouteService]
+let appServices = [ContactUsService, PnrStatusService, LivetrainStatusService, TrainBtwStationsService, TrainRouteService,]
+let libraryServices = [{
+  provide: HTTP_INTERCEPTORS,
+  useClass: loadingInterceptor,
+  multi: true
+}]
 
 @NgModule({
   declarations: [
@@ -33,7 +39,7 @@ let appServices = [ContactUsService, PnrStatusService, LivetrainStatusService, T
   imports: [
     BrowserModule, AppRoutes, FormsModule, HttpClientModule, AngularFontAwesomeModule,NgbModule.forRoot()
   ],
-  providers: appServices,
+  providers: [appServices, libraryServices],
   bootstrap: [AppComponent]
 })
 

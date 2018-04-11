@@ -23,6 +23,10 @@ const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'C
 
 export class TrainBtwStationsComponent implements OnInit {
   
+  noDataFound: boolean;
+  trainNumWrong: boolean;
+  loadingFail: boolean;
+  apiKeyFail: boolean;
   noTrainsFound: boolean;
   trainBtwStationsForminvalid: boolean;
  public isCollapsed = true;
@@ -82,21 +86,28 @@ export class TrainBtwStationsComponent implements OnInit {
   }
 
   trainBtwStations(formValues){
-    if(formValues.fromstation && formValues.tostation && formValues.dp){
-      let doj = formValues.dp;
+
+    this.apiKeyFail = false;
+    this.trainNumWrong = false;
+    this.noDataFound = false;
+    this.loadingFail = false;
+
+    if(formValues.fromStations && formValues.toStations && formValues.date){
+      let doj = formValues.date;
       doj = doj.day +'-'+doj.month +'-'+doj.year;
-      let data:object = {fromstation: formValues.fromstation.split(' ')[0], tostation:formValues.tostation.split(' ')[0], doj:doj};
+      let data:object = {fromstation: formValues.fromStations.split(' ')[0], tostation:formValues.toStations.split(' ')[0], doj:doj};
   
       this.TrainBtwStationsService.getTrainBtwstationsAPI(data)
       .subscribe(
         responseObj =>(
           this.trainsData = responseObj,
-          this.trainsData.trains.length ===0 ?this.noTrainsFound =true : this.noTrainsFound =false
+          (this.trainsData.trains && this.trainsData.trains.length === 0 && this.trainsData.response_code === 500) ? this.apiKeyFail = true: this.apiKeyFail = false, 
+          (this.trainsData.trains && this.trainsData.trains.length === 0 && this.trainsData.response_code === 502) ? this.trainNumWrong = true: this.trainNumWrong = false,
+          (this.trainsData.trains && this.trainsData.trains.length === 0 && this.trainsData.response_code === 404) ? this.noDataFound = true: this.noDataFound = false, 
+          (this.trainsData.trains && this.trainsData.trains.length === 0 && this.trainsData.response_code === 405) ? this.loadingFail = true: this.loadingFail = false
         ),
         errorObj=>(this.errorObj = errorObj)
       )
-    } else {
-      this.trainBtwStationsForminvalid = true;
     }
   
   }
