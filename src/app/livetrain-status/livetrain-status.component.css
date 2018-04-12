@@ -45,3 +45,10 @@
       opacity: 0;
     }
   }
+  .date-selection{
+    background-color: #49e3ce;
+    color: #fff;
+    padding: 5px 5px;
+    border-radius: 0px;
+    height: 38px;
+  }

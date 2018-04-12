@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 export class loadingInterceptor implements HttpInterceptor {
     constructor() { }
 
-    intercept(req: HttpRequest, next: HttpHandler): Observable<HttpEvent> {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let loadingContainer: HTMLElement = document.getElementsByClassName('loading').item(0) as HTMLElement;
         loadingContainer.style.display = 'block';
         //send the request

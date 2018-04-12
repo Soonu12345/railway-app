@@ -4,20 +4,42 @@
     <div class="row">
       <div class="mx-auto col-lg-6">
         <div class="input-group form-group">
-          <input type="text"  #trainNum="ngModel" class="pnr-search-bar form-control" name="trainNum" [(ngModel)]="trainNumber" placeholder="Enter Train Number..." required>
+          <input type="text" #trainNum="ngModel" class="pnr-search-bar form-control" name="trainNum" 
+          [(ngModel)]="trainNumber" placeholder="Enter Train Number..."
+            required>
           <span class="input-group-btn">
             <button class="btn pnr-search-btn btn-secondary pnr-seearch-btn" type="submit">Search</button>
           </span>
         </div>
         <div class="error-message" *ngIf="LiveTrainStatusForm.submitted && trainNum.errors?.required">Please enter Train Number</div>
       </div>
+
+
+      <div class="col-md-4" *ngIf="trainNumber">
+        <div class="col">
+          <div ngbDropdown class="d-inline-block">
+            <button class="date-selection btn" id="dropdownBasic1" ngbDropdownToggle type="button">
+              {{custDate.label}}
+            </button>
+           
+           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button class=" dropdown-item"
+              type="button"
+              *ngFor="let date of custDatesArr"
+              (click)="custDate=date">
+                {{date.label}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </form>
 
   <div class="row m-t-20" *ngIf="responseObj">
     {{responseObj.position}}
-    <table class="m-t-20 table table-striped table-condensed table-hover" align="center"
-    *ngIf="responseObj.train.name!==null">
+    <table class="m-t-20 table table-striped table-condensed table-hover" align="center" *ngIf="responseObj.train.name!==null">
       <tr>
         <th>NO.</th>
         <th>Station Name</th>
@@ -32,7 +54,7 @@
           <div class="active-state" *ngIf="responseObj.current_station.code!==liveRecord.station.code">
 
           </div>
-   
+
           <div class="blink_me" *ngIf="responseObj.current_station.code===liveRecord.station.code">
             <div class="active-circle-outer">
               <div class="active-circle-inner">
@@ -52,7 +74,7 @@
     </table>
 
     <div *ngIf="apiKeyFail || noDataFound" class="err-msg col-md-12 text-center">
-        No Data found
+      No Data found
     </div>
     <div *ngIf="trainNumWrong" class="err-msg col-md-12 text-center">
       Please check the Train Number you have entered.

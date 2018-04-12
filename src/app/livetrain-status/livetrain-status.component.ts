@@ -24,30 +24,40 @@ export class LivetrainStatusComponent implements OnInit {
   loadingFail: boolean;
   trainNumWrong: boolean;
   apiKeyFail: boolean;
+  custDatesArr=[{"label":"Today","id":0},{"label":"Yesterday","id":1},{"label":"2 Days ago","id":2},{"label":"3 Days ago","id":3}]
+  custDate=this.custDatesArr[0];
 
   ngOnInit() {
   }
+
+  funcName = (params) => {
+    this.today = new Date();
+    this.today.setDate(this.today.getDate() - params.id);
+    this.today=new Date(this.today);
+    console.log(this.today,"this.today")
+    this.dd = this.today.getDate();
+    this.mm = this.today.getMonth() + 1; //January is 0!
+    this.yyyy = this.today.getFullYear();
+    if (this.dd < 10) {
+      this.dd = '0' + this.dd;
+    }
+    if (this.mm < 10) {
+      this.mm = '0' + this.mm;
+    }
+    this.reqDate = this.dd + '-' + this.mm + '-' + this.yyyy;
+  }
+
+
+
+
   getLiveTrainStatus() {
-    
     this.apiKeyFail = false;
     this.trainNumWrong = false;
     this.noDataFound = false;
     this.loadingFail = false;
-
     if (this.trainNumber) {
+      this.funcName(this.custDate);
       this.trainNumberExistance = false;
-
-      this.today = new Date();
-      this.dd = this.today.getDate();
-      this.mm = this.today.getMonth() + 1; //January is 0!
-      this.yyyy = this.today.getFullYear();
-      if (this.dd < 10) {
-        this.dd = '0' + this.dd;
-      }
-      if (this.mm < 10) {
-        this.mm = '0' + this.mm;
-      }
-      this.reqDate = this.dd + '-' + this.mm + '-' + this.yyyy;
       let index;
       let reqTrainNumber = this.trainNumber.trim();
       this.LivetrainStatusService.getLiveTrainStatus(reqTrainNumber, this.reqDate).
@@ -73,4 +83,10 @@ export class LivetrainStatusComponent implements OnInit {
       this.trainNumberExistance = true;
     }
   }
+
+
+  
+
+
+
 }
